@@ -34,7 +34,7 @@ pool.getConnection(function (err, connection) {
   question_code_block varchar(255),
   tags varchar(255),
   post_id varchar(255) ,
-  user_id INT,
+  user_id INT not null ,
   PRIMARY KEY (question_id),
   UNIQUE KEY (post_id),
   FOREIGN KEY (user_id) REFERENCES registration(user_id)

@@ -7,7 +7,7 @@ const {
 
 module.exports = {
 	createQuestion: (req, res) => {
-		const { question, description } = req.body;
+		const { question, description,userId } = req.body;
 		//  const userId = req.user.id;//
 
 		if (!question || !description) {
@@ -19,7 +19,7 @@ module.exports = {
 		const data = {
 			question,
 			description,
-			// userId,
+			userId,
 		};
 
 		ask(data, (err, result) => {
