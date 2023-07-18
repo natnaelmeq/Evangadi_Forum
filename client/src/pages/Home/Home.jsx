@@ -3,6 +3,7 @@ import { UserContext } from "../../context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import Dashbord from "../Dashbord/Dashbord";
 import Header from "../Header/Header";
+import './Home.css'
 
 const Home = ({ logout }) => {
 	const [userData] = useContext(UserContext);
@@ -22,7 +23,22 @@ const Home = ({ logout }) => {
 			<div>
 				{userData.user ? (
 					<>
-						<h1>Welcome {userData.user?.display_name}</h1>
+						<div className="upper  container ">
+							<Link to={"/question"} className="ask">
+								<button className="bg-primary text-white border-none">
+									Ask Question
+								</button>{" "}
+							</Link>
+							<h3>Welcome :- {userData.user?.display_name}</h3>
+						</div>
+						<div className="pt-5 pb-5  container">
+							<h3> Questions </h3>
+						</div>
+						
+							<Dashbord />
+						
+
+						{/* <h1>Welcome </h1>
 						<button onClick={logout}>Log Out</button> <br />
 						<br />
 						<Link to="/question">
@@ -32,7 +48,7 @@ const Home = ({ logout }) => {
 						<h1>Questions</h1>
 						<Link to={"/answer"}>
 							<Dashbord />
-						</Link>
+						</Link> */}
 					</>
 				) : null}
 			</div>

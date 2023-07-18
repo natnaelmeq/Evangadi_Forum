@@ -39,9 +39,9 @@ module.exports = {
 				} else {
 					const salt = bcrypt.genSaltSync();
 					const hashedPassword = bcrypt.hashSync(password, salt);
-					console.log(password)
-					console.log(hashedPassword)
-					console.log(req.body)
+					// console.log(password)
+					// console.log(hashedPassword)
+					// console.log(req.body)
 
 					register(
 						{ userName, email, password: hashedPassword },
@@ -54,7 +54,7 @@ module.exports = {
 							}
 
 							const userId = result.insertId;
-							console.log(req.body);
+							console.log(userId);
 
 							profile({ userId, firstName, lastName }, (err, results) => {
 								if (err) {
@@ -72,6 +72,7 @@ module.exports = {
 			}
 		);
 	},
+	
 	getUsers: (req, res) => {
 		getAllUsers((err, result) => {
 			if (err) {
@@ -81,6 +82,7 @@ module.exports = {
 			return res.status(200).json({ data: result });
 		});
 	},
+
 	getUserById: (req, res) => {
 		userById(req.id, (err, results) => {
 			if (err) {

@@ -1,18 +1,20 @@
-import  {  useEffect } from "react";
+import { useEffect } from "react";
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "./context/UserContext.jsx";
+import { UserContext } from "./context/UserContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Login from "./pages/Login/Login.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Question from "./pages/Question/Question";
-import SignUp from "./pages/SignUP/Signup.jsx";
+import SignUp from "./pages/SignUP/SignUP.jsx";
 import Answer from "./pages/Answer/Answer.jsx";
 import Header from "./pages/Header/Header.jsx";
+import Footer from "./pages/Footer/Footer.jsx";
 
 function App() {
-	const [userData, setuserData ] = useContext(UserContext);
+	const [userData, setuserData] = useContext(UserContext);
 	const checkLoggedIN = async () => {
 		let token = localStorage.getItem("auth-token");
 		if (token === null) {
@@ -47,17 +49,17 @@ function App() {
 	return (
 		<Router>
 			<div>
-				
 				<Routes>
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/question" element={<Question />} />
-					{/* <Route path="/answer/:questionId" element={<Answer />} /> */}
+					<Route path="/question/:id" element={<Answer />} />
 
 					<Route path="/" element={<Home logout={logout} />} />
 				</Routes>
-			</div>
+			</div><Footer/>
 		</Router>
+		
 	);
 }
 

@@ -32,7 +32,7 @@ const pool = require("../../config/database.jsx");
 
 const questionDashbord = (req, res) => {
 	pool.query(
-		"SELECT q.question,q.question_description , r.user_name FROM question q INNER JOIN registration r ON q.user_id = r.user_id ORDER BY q.question_id DESC",
+		"SELECT q.question,q.question_description,q.question_id , r.user_name FROM question q INNER JOIN registration r ON q.user_id = r.user_id ORDER BY q.question_id DESC",
 		[],
 		(err, result) => {
 			if (err) {

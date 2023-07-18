@@ -6,6 +6,7 @@ import "./index.css";
 import { UserProvider } from "./context/UserContext.jsx";
 
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<UserProvider>
 		<App />

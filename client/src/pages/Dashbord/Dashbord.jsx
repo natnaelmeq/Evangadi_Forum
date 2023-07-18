@@ -3,10 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie } from "@fortawesome/free-solid-svg-icons";
+import "./Dashbord.css";
+import { Link } from "react-router-dom";
 
 const Dashbord = () => {
 	const [question, setQuestion] = useState([]);
 	const [userData] = useContext(UserContext);
+	console.log(question)
+
 
 	useEffect(() => {
 		fetchQuestions();
@@ -26,8 +30,32 @@ const Dashbord = () => {
 
 	return (
 		<>
-			
-			<div style={{ backgroundColor: "#CCCCCC",margin:'10px' }}>
+			<div className="container">
+				{question.map((singleQ) => (
+					<Link
+						to={`/question/${singleQ.question_id}`}
+						key={singleQ.question_id}
+						className="d-flex  main-wrapper container"
+					>
+						<div className="inside">
+							<div className="tieuser">
+								<i className="fa-solid fa-user-tie  tie"></i>
+								<p className="">{singleQ.user_name}</p>
+							</div>
+							<div>
+								<h3 className="lead"> {singleQ.question}</h3>
+								{/* <p className="">{singleQ.question_id}</p> */}
+							</div>
+						</div>
+
+						<div className="sign p-5">
+							<i class="fa-solid fa-chevron-right fa-xl"></i>
+						</div>
+					</Link>
+				))}
+			</div>
+
+			{/* <div style={{ backgroundColor: "#CCCCCC", margin: "10px" }}>
 				{question.map((singleQ) => (
 					<div key={singleQ.question_id}>
 						<h3>{singleQ.question}</h3>
@@ -41,13 +69,12 @@ const Dashbord = () => {
 						<hr />
 					</div>
 				))}
-			</div>
+			</div> */}
 		</>
 	);
 };
 
 export default Dashbord;
-
 
 //test
 
