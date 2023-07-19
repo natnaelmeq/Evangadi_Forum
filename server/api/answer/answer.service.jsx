@@ -3,8 +3,8 @@ const pool = require("../../config/database.jsx");
 module.exports = {
 	answerText: (data, callback) => {
 		pool.query(
-			"INSERT INTO answer(answer,user_id) VALUES (?, ?)",
-			[data.answer, data.userId],
+			"INSERT INTO answer(answer_id,question_id, answer,user_id) VALUES (?, ?,?,?)",
+			[data.answerid, data.questionid, data.answer, userId],
 			(err, result) => {
 				if (err) {
 					return callback(err);

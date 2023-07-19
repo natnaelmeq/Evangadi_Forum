@@ -1,10 +1,15 @@
 const router = require("express").Router();
 
-const { createAnswer, allAnswers } = require("./answer.conroller.jsx");
+const {
+	createAnswer,
+	// allAnswers,
+	getAnswers,
+} = require("./answer.conroller.jsx");
 
 
 router.post("/", createAnswer);
-router.get("/allAnswer", allAnswers);
+router.get("/allAnswerForQ/:id", getAnswers);
+// router.get("/allAnswer", allAnswers);
 // router.get("/answer/:id", answerById);
 
 

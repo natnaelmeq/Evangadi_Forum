@@ -36,6 +36,8 @@ const Login = () => {
 				token: loginRes.data.token,
 				user: loginRes.data.user,
 			});
+			
+
 
 			localStorage.setItem("auth-token", loginRes.data.token);
 			navigate("/");

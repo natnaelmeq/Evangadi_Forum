@@ -25,7 +25,20 @@ const Answer = () => {
 		fetchQuestion();
 	}, [id]);
 
-	
+	useEffect(() => {
+		const fetchAnswers = async () => {
+			try {
+				const response = await axios.get(
+					`http://localhost:4500/api/answer/allAnswerForQ/${id}`
+				);
+				const data = response.data;
+				setQuestion(data);
+			} catch (error) {
+				console.log("Error:", error);
+			}
+		};
+		fetchAnswers();
+	}, [id]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -34,7 +47,7 @@ const Answer = () => {
 
 			if (value) {
 				await axios.post("http://localhost:4500/api/answer", {
-					name: value,
+					answer: value,
 				});
 				console.log(value);
 				setSubmittedAnswer(value); 
@@ -52,6 +65,7 @@ const Answer = () => {
 				<div>
 					<div>{question.question}</div>
 					<div>{question.question_description}</div>
+					<div>{question.question_id}</div>
 				</div>
 			) : (
 				<div>Loading...</div>

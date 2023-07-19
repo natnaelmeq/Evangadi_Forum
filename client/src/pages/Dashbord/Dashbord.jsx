@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 import "./Dashbord.css";
 import { Link } from "react-router-dom";
+import { Form } from "react-bootstrap";
 
 const Dashbord = () => {
 	const [question, setQuestion] = useState([]);
 	const [userData] = useContext(UserContext);
-	console.log(question)
-
+	const [search, setsearch] = useState("");
+	console.log(question);
 
 	useEffect(() => {
 		fetchQuestions();
@@ -31,28 +32,40 @@ const Dashbord = () => {
 	return (
 		<>
 			<div className="container">
-				{question.map((singleQ) => (
-					<Link
-						to={`/question/${singleQ.question_id}`}
-						key={singleQ.question_id}
-						className="d-flex  main-wrapper container"
-					>
-						<div className="inside">
-							<div className="tieuser">
-								<i className="fa-solid fa-user-tie  tie"></i>
-								<p className="">{singleQ.user_name}</p>
+				<Form.Control
+					className="py-2 mt-2 form-control"
+					type="search"
+					placeholder="search"
+					onChange={(e) => setsearch(e.target.value)}
+				/>
+				{question
+					.filter((item) => {
+						return search.toLowerCase() === ""
+							? item
+							: item.question.toLowerCase().includes(search);
+					})
+					.map((singleQ) => (
+						<Link
+							to={`/question/${singleQ.question_id}`}
+							key={singleQ.question_id}
+							className="d-flex  main-wrapper container"
+						>
+							<div className="inside">
+								<div className="tieuser">
+									<i className="fa-solid fa-user-tie  tie"></i>
+									<p className="">{singleQ.user_name}</p>
+								</div>
+								<div>
+									<h3 className="lead"> {singleQ.question}</h3>
+									<p className="">{singleQ.question_id}</p>
+								</div>
 							</div>
-							<div>
-								<h3 className="lead"> {singleQ.question}</h3>
-								{/* <p className="">{singleQ.question_id}</p> */}
-							</div>
-						</div>
 
-						<div className="sign p-5">
-							<i class="fa-solid fa-chevron-right fa-xl"></i>
-						</div>
-					</Link>
-				))}
+							<div className="sign p-5">
+								<i class="fa-solid fa-chevron-right fa-xl"></i>
+							</div>
+						</Link>
+					))}
 			</div>
 
 			{/* <div style={{ backgroundColor: "#CCCCCC", margin: "10px" }}>
