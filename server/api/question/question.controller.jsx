@@ -1,14 +1,12 @@
 const pool = require("../../config/database.jsx");
-const {
-	ask,
-	getallQuestions
-
-} = require("./question.service.jsx");
+const { ask, getallQuestions } = require("./question.service.jsx");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 module.exports = {
 	createQuestion: (req, res) => {
-		const { question, description,userId } = req.body;
-		//  const userId = req.user.id;//
+		const { question, description, userId } = req.body;
+		
 
 		if (!question || !description) {
 			return res
@@ -29,9 +27,16 @@ module.exports = {
 					.status(500)
 					.json({ msg: "Error asking the question", error: err });
 			}
-
-			return res.status(200).json({ msg: "Question asked successfully" });
+			const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+				expiresIn: "3h",
+			});
+			return res.json({
+				token,
+				user: { id: result.userId, display_name: result.user_name },
+			});
 		});
+
+	
 	},
 	questions: (req, res) => {
 		getallQuestions((err, result) => {

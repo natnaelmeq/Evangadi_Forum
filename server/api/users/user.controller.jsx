@@ -113,15 +113,18 @@ module.exports = {
 			const isMatch = bcrypt.compareSync(password, results.user_password);
 			if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" });
 			const token = jwt.sign({ id: results.user_id }, process.env.JWT_SECRET, {
-				expiresIn: "1h",
+				expiresIn: "3h",
 				
 			});
 			console.log(token)
-			console.log(email,password)
+			console.log(email, password)
+			// console.log(results)
 			return res.json({
 				token,
 				user: { id: results.user_id, display_name: results.user_name },
+				
 			});
+			
 		});
 	},
 };

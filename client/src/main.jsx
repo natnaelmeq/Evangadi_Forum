@@ -13,21 +13,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	</UserProvider>
 );
 
-// import React from "react";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { UserProvider } from "./context/UserContext.jsx";
-// import App from "./App";
-
-// const Root = () => {
-//   return (
-//     <Router>
-//       <UserProvider>
-//         <Routes>
-//           <Route path="/" element={<App />} />
-//         </Routes>
-//       </UserProvider>
-//     </Router>
-//   );
-// };
-
-// export default Root;

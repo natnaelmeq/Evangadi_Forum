@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserTie } from "@fortawesome/free-solid-svg-icons";
+
 import "./Dashbord.css";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
@@ -11,7 +10,7 @@ const Dashbord = () => {
 	const [question, setQuestion] = useState([]);
 	const [userData] = useContext(UserContext);
 	const [search, setsearch] = useState("");
-	console.log(question);
+	// console.log(question);
 
 	useEffect(() => {
 		fetchQuestions();
@@ -23,7 +22,7 @@ const Dashbord = () => {
 				"http://localhost:4500/api/question/dashbord"
 			);
 			setQuestion(data.data);
-			console.log(data.data);
+			// console.log(data.data);
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -32,12 +31,31 @@ const Dashbord = () => {
 	return (
 		<>
 			<div className="container">
-				<Form.Control
+				<form className="d-flex">
+					<input
+						style={{
+							border: "3px solid black",
+							width: "40%",
+							margin: "0px auto 55px",
+							textAlign: "center",
+						}}
+						className="form-control me-2"
+						type="search"
+						placeholder="Search"
+						aria-label="Search"
+						onChange={(e) => setsearch(e.target.value)}
+					/>
+					{/* <button style={{border:'3px solid black', width:'40%', margin:'0px auto 55px',textAlign: 'center'}} className="btn btn-outline-success" type="submit">
+						Search
+					</button> */}
+				</form>
+				{/* <Form.Control
+					style={{border:'3px solid black', width:'40%', margin:'0px auto 55px',textAlign: 'center'}}
 					className="py-2 mt-2 form-control"
 					type="search"
 					placeholder="search"
 					onChange={(e) => setsearch(e.target.value)}
-				/>
+				/> */}
 				{question
 					.filter((item) => {
 						return search.toLowerCase() === ""
@@ -57,7 +75,7 @@ const Dashbord = () => {
 								</div>
 								<div>
 									<h3 className="lead"> {singleQ.question}</h3>
-									<p className="">{singleQ.question_id}</p>
+									{/* <p className="">{singleQ.question_id}</p> */}
 								</div>
 							</div>
 
@@ -67,73 +85,8 @@ const Dashbord = () => {
 						</Link>
 					))}
 			</div>
-
-			{/* <div style={{ backgroundColor: "#CCCCCC", margin: "10px" }}>
-				{question.map((singleQ) => (
-					<div key={singleQ.question_id}>
-						<h3>{singleQ.question}</h3>
-						<h5>{singleQ.question_description}</h5>
-						<div>
-							<FontAwesomeIcon icon={faUserTie} />
-
-							<h3>{singleQ.user_name}</h3>
-						</div>
-
-						<hr />
-					</div>
-				))}
-			</div> */}
 		</>
 	);
 };
 
 export default Dashbord;
-
-//test
-
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// const Dashboard = () => {
-// 	const [question, setQuestion] = useState([]);
-// 	const navigate = useNavigate();
-
-// 	useEffect(() => {
-// 		fetchQuestions();
-// 	}, []);
-
-// 	async function fetchQuestions() {
-// 		try {
-// 			const { data } = await axios.get(
-// 				"http://localhost:4500/api/question/dashbord"
-// 			);
-// 			setQuestion(data.data);
-// 		} catch (error) {
-// 			console.log(error.message);
-// 		}
-// 	}
-
-// 	const handleQuestionClick = (questionId) => {
-// 		navigate(`/answer/${questionId}`);
-// 	};
-
-// 	return (
-// 		<>
-// 			<div style={{ backgroundColor: "#CCCCCC", margin: "10px" }}>
-// 				{question.map((singleQ) => (
-// 					<div
-// 						key={singleQ.question_id}
-// 						onClick={() => handleQuestionClick(singleQ.question_id)}
-// 					>
-// 						<h3>{singleQ.question}</h3>
-// 						<h5>{singleQ.question_description}</h5>
-// 						<hr />
-// 					</div>
-// 				))}
-// 			</div>
-// 		</>
-// 	);
-// };
-
-// export default Dashboard;

@@ -14,8 +14,8 @@ const Home = ({ logout }) => {
 		if (!userData.user) navigate("/login");
 	}, [userData.user, navigate]);
 
-	console.log("userData:", userData);
-	console.log("userData.user:", userData.user);
+	// console.log("userData:", userData);
+	// console.log("userData.user:", userData.user);
 
 	return (
 		<>
@@ -38,17 +38,6 @@ const Home = ({ logout }) => {
 							<Dashbord />
 						
 
-						{/* <h1>Welcome </h1>
-						<button onClick={logout}>Log Out</button> <br />
-						<br />
-						<Link to="/question">
-							<button>Ask Question</button>
-						</Link>
-						<hr />
-						<h1>Questions</h1>
-						<Link to={"/answer"}>
-							<Dashbord />
-						</Link> */}
 					</>
 				) : null}
 			</div>

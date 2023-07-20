@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
@@ -12,10 +12,14 @@ const Question = () => {
 	const questionInputRef = useRef(null);
 	const descriptionInputRef = useRef(null);
 	const [form, setForm] = useState({});
+	const navigate = useNavigate();
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
-
+	useEffect(() => {
+		if (!userData.user) navigate("/login");
+	}, [userData.user, navigate]);
+	const gettoken = localStorage.getItem("authtoken");
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -25,7 +29,15 @@ const Question = () => {
 				question: ask,
 				description: askDescription,
 				userId: userData?.user?.id,
+				token: gettoken,
 			});
+
+			setUserData({
+				...userData,
+				token: response.data.token,
+			});
+
+			navigate("/question");
 
 			console.log("Response Data:", response.data);
 			questionInputRef.current.value = "";
@@ -83,42 +95,6 @@ const Question = () => {
 				</Link>
 			</div>
 		</div>
-
-		// <div>
-		// 	<Header/>
-		// 	<h2>Steps to write a good Question</h2>
-		// 	<ul>
-		// 		<li>Summarize your problems in a one-line title.</li>
-		// 		<li>Describe your problem in more detail.</li>
-		// 		<li>Explain what you have tried and what you expected to happen.</li>
-		// 		<li>Review your question and post it to the site.</li>
-		// 	</ul>
-		// 	<h2>Ask a public question</h2>
-
-		// 	<form onSubmit={handleSubmit} action="">
-		// 		<input
-		// 			ref={questionInputRef}
-		// 			type="text"
-		// 			name="question"
-		// 			placeholder="Title"
-		// 			onChange={handleChange}
-		// 		/>{" "}
-		// 		<br /> <br />
-		// 		<input
-		// 			ref={descriptionInputRef}
-		// 			type="text"
-		// 			name="description"
-		// 			placeholder="Question Description ..."
-		// 			onChange={handleChange}
-		// 		/>{" "}
-		// 		<br /> <br />
-		// 		<button>Post Your Question</button>
-		// 	</form>
-		// 	<br />
-		// 	<Link to={"/"}>
-		// 		<button>Back to DashBord</button>
-		// 	</Link>
-		// </div>
 	);
 };
 

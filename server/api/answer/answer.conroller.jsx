@@ -1,18 +1,21 @@
-const pool = "../../config/database.jsx";
+const pool = require("../../config/database.jsx");
 const { answerText, getallAnswers } = require("./answer.service.jsx");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 module.exports = {
 	createAnswer: (req, res) => {
-		const { answer, questionid,userid } = req.body;
-		// const userId = req.user.id;
+		const { questionid, answer, userId } = req.body;
+		// const usequestionidrId = req.user.id;
 
-		if ((!answer, !questionid)) {
+		if (!answer || !questionid) {
 			return res.status(400).json({ msg: "please complete the answer" });
 		}
 
 		const data = {
-			answer,questionid
-			
+			answer,
+			questionid,
+			userId,
 		};
 
 		answerText(data, (err, result) => {
@@ -21,22 +24,31 @@ module.exports = {
 				return res.status(500).json({ msg: "Error", error: err });
 			}
 
-			return res.status(200).json({ msg: " successfully answered" });
+			const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+				expiresIn: "3h",
+			});
+			return res.json({
+				token,
+				user: { id: result.userId, display_name: result.user_name },
+			});
 		});
 	},
-
 	getAnswers: (req, res) => {
-		const questionid = req.params.id;
-		const answersForQuestion =
-			"SELECT user_name, answer FROM answer JOIN registration ON answer.user_id = registration.user_id WHERE answer.question_id = ?";
+		const questionId = req.params.id;
+		const answersForQuestionQuery = `
+    SELECT user_name, answer FROM answer 
+    JOIN registration ON answer.user_id = registration.user_id 
+    WHERE answer.question_id = ?`;
 
-		pool.query(answersForQuestion, [questionid], (error, results) => {
+		pool.query(answersForQuestionQuery, [questionId], (error, results) => {
 			if (error) {
 				return res.status(500).json({ msg: error });
 			}
 
 			if (results.length < 1) {
-				return res.status(404).send(`No answer with id: ${questionid}`);
+				return res
+					.status(404)
+					.send(`No answers for question with id: ${questionId}`);
 			} else {
 				const answers = results.map((row) => ({
 					username: row.user_name,
@@ -46,13 +58,14 @@ module.exports = {
 			}
 		});
 	},
-	// allAnswers: (req, res) => {
-	// 	getallAnswers((err, result) => {
-	// 		if (err) {
-	// 			console.log(err);
-	// 			return res.status(500).json({ msg: "database connection err" });
-	// 		}
-	// 		return res.status(200).json({ data: result });
-	// 	});
-	// },
+
+	allAnswers: (req, res) => {
+		getallAnswers((err, result) => {
+			if (err) {
+				console.log(err);
+				return res.status(500).json({ msg: "database connection err" });
+			}
+			return res.status(200).json({ data: result });
+		});
+	},
 };

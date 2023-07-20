@@ -8,7 +8,6 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-// import SignUp from "../SignUP/SignUP";
 import bg from "../../assets/Image/bg-svg-f.svg";
 import "./Login.css";
 
@@ -36,10 +35,10 @@ const Login = () => {
 				token: loginRes.data.token,
 				user: loginRes.data.user,
 			});
-			
 
+			console.log(loginRes.data.token);
 
-			localStorage.setItem("auth-token", loginRes.data.token);
+			localStorage.setItem("authtoken", loginRes.data.token);
 			navigate("/");
 		} catch (error) {
 			console.log("Error:", error.response.data.msg);
@@ -49,7 +48,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (userData.user) navigate("/");
-	}, [userData.user, navigate]);
+	}, []);
 
 	return (
 		<>
@@ -67,7 +66,7 @@ const Login = () => {
 				<Container>
 					<Row>
 						<Col>
-							<div className="login_container  pt-4">
+							<div className="login_container  pt-4 shadow">
 								{/* <h1>Login</h1> */}
 								<div className="py-1 text-center px-md-1 px-sm-3 mx-md-3">
 									<h5>Login to your account</h5>
@@ -113,36 +112,12 @@ const Login = () => {
 										Log In
 									</button>
 								</form>
-								<div className="link mt-4">
-									<Link to="/signup">Create a new account</Link>
+								<div className="link mt-4 ">
+									<Link className="link" to="/signup">
+										Create a new account
+									</Link>
 								</div>
 							</div>
-
-							{/* <div>
-								<form onSubmit={handleSubmit}>
-									<label htmlFor="email">Email:</label>
-									<input
-										type="text"
-										id="email"
-										name="email"
-										onChange={handleChange}
-										placeholder="Email"
-									/>{" "}
-									<br />
-									<label htmlFor="password">Password:</label>
-									<input
-										type="password"
-										id="password"
-										name="password"
-										placeholder="Password"
-										onChange={handleChange}
-									/>{" "}
-									<br />
-									<button type="submit">Submit</button>
-								</form>
-								<Link to="/signup">Create a new Account</Link>
-							</div> */}
-							{/* <div className="rounded  shadow ">{<SignUp />}</div> */}
 						</Col>
 
 						<Col sm={12} md={6}>
