@@ -80,7 +80,7 @@ const Dashbord = () => {
 							</div>
 
 							<div className="sign p-5">
-								<i class="fa-solid fa-chevron-right fa-xl"></i>
+								<i className="fa-solid fa-chevron-right fa-xl"></i>
 							</div>
 						</Link>
 					))}

@@ -2,21 +2,24 @@
 	margin: 0;
 	padding: 0;
 }
-.imageSize {
+/* .imageSize {
 	width: 40%;
 	height: auto;
-}
+} */
 img {
 	max-width: 100%;
 }
 
-.mainWrapper {
+/* header {
+	background-color: red;
+} */
+/* .mainWrapper {
 	width: 70%;
-}
-.topmargin{
+} */
+/* .topmargin{
 	padding-top: 100px;
-}
-.backImage {
+} */
+/* .backImage {
 	background-image: url(../images/bg-svg-f.svg);
 	background-repeat: no-repeat;
 	background-position: center;
@@ -25,19 +28,19 @@ img {
 	width: 100%;
 
 	background-color: #f8f8f8;
-}
+} */
 
-.headWrapper {
+/* .headWrapper {
 	box-shadow: black;
 	border-bottom: .5px solid rgba(0, 0, 0, 0.067);
 	background-color: #ffffff;
     z-index: 1;
-}
-a {
+} */
+/* a {
 	text-decoration: none;
 	color: #333333;
-}
-input {
+} */
+/* input {
 	color: #333333;
 	font-size: 14px;
 	height: 40px;
@@ -52,47 +55,54 @@ input {
 
 	line-height: 1.5;
 	margin-bottom: 10px;
-}
+} */
 
-.signUpform {
+/* .signUpform {
 	border-radius: 10px;
 
 	background: linear-gradient(50deg, #fafafa, #ffffff);
 	box-shadow: 20px -20px 60px #e8eae9, -20px 20px 60px #ffffff;
-}
-.submitBtn {
+} */
+/* .submitBtn {
 	background-color: rgb(62, 112, 220);
 	border-radius: 5px;
 	color: white;
 	height: 35px;
 	border: #ccc;
 	width: 80%;
-}
-.submitBtn:hover {
+} */
+/* .submitBtn:hover {
 	background-color: rgb(231, 116, 22);
-}
-.submitBtn1 {
+} */
+/* .submitBtn1 {
 	background-color: rgb(231, 116, 22);
 	border-radius: 5px;
 	color: white;
 	height: 35px;
 	border: #ccc;
 	width: 130px;
-}
+} */
 .signIn {
-	background-color: rgb(62, 112, 220);
-	border-radius: 5px;
-	color: white;
-	height: 45px;
+	background-color: rgb(60, 93, 255);
+	border-radius: 6px;
+	/* color: white; */
+	/* height: 45px; */
 	border: #ccc;
-	width: 130px;
+	padding: 10px 70px;
 }
 .signIn:hover {
 	background-color: rgb(231, 116, 22);
 }
+.navbar-toggle {
+	color: rgb(231, 116, 22);
+}
+.nav-link:hover {
+	color: rgb(231, 116, 22); 
+}
 .orange {
 	color: rgb(231, 116, 22);
 }
+
 .red {
 	background-color: pink;
 	border: solid red;
@@ -109,7 +119,7 @@ input {
 	border: #ccc;
 	width: 130px;
 }
-#close {
+/* #close {
 	display: none;
 	background-color: rgb(231, 116, 22);
 	border-radius: 5px;
@@ -117,5 +127,11 @@ input {
 	height: 35px;
 	border: #ccc;
 	width: 130px;
-}
+} */
 
+@media (max-width: 720px) {
+	.bg-orange {
+		background-color: #fe8303 !important;
+		color: white;
+	}
+}

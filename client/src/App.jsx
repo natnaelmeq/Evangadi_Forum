@@ -8,7 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/Login/Login.jsx";
 import Home from "./pages/Home/Home.jsx";
 import Question from "./pages/Question/Question";
-import SignUp from "./pages/SignUP/Signup";
+import SignUp from "./pages/SignUP/SignUP";
 import Answer from "./pages/Answer/Answer.jsx";
 import Header from "./pages/Header/Header.jsx";
 import Footer from "./pages/Footer/Footer.jsx";
@@ -58,9 +58,9 @@ function App() {
 
 					<Route path="/" element={<Home logout={logout} />} />
 				</Routes>
-			</div><Footer/>
+			</div>
+			<Footer />
 		</Router>
-		
 	);
 }
 

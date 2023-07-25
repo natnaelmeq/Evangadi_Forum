@@ -15,16 +15,16 @@ const Footer = () => {
 							<div className="telegram col-sm p-2">
 								{" "}
 								{/* <TelegramIcon /> */}
-								<i class="fab fa-telegram"></i>
+								<i className="fab fa-telegram"></i>
 							</div>
 							<div className="linkedin col-sm p-2">
 								{/* <LinkedInIcon /> */}
-								<i class="fab fa-linkedin"></i>
+								<i className="fab fa-linkedin"></i>
 							</div>
 							<div className="whatsup col-sm p-2">
 								{" "}
 								{/* <WhatsAppIcon /> */}
-								<i class="fab fa-whatsapp"></i>
+								<i className="fab fa-whatsapp"></i>
 							</div>
 						</div>
 					</div>

@@ -1,37 +1,37 @@
-body {
+/* body {
 	margin-top: 100px;
 	z-index: -1;
-}
-.ask button {
+} */
+/* .ask button {
 	border: none;
 	padding: 15px;
 	border-radius: 5px;
 	/* width: 70px; */
-}
-.upper {
+/* } */
+/* .upper {
 	display: flex;
 	justify-content: space-between;
 }
 .tie {
 	font-size: 100px;
 	color: #cccccc;
-}
-.main-wrapper {
+} */
+/* .main-wrapper { */
     /* margin-right: 100px; */
 
-	display: flex;
+	/* display: flex;
 	justify-content: space-between;
 	padding: 25px 0;
 	border: 1px solid #ccc;
 	border-left: none;
 	border-right: none;
 	margin-bottom: 25px;
-}
-.inside {
-	display: flex;
+} */
+/* .inside {
+	display: flex; */
 	/* justify-content:space-evenly; */
-}
-.tieuser {
+/* } */
+/* .tieuser {
 	padding-right: 200px;
 }
 .sign{
@@ -44,4 +44,4 @@ margin-right:30px}
 	.inside {
 		display: block;
 	}
-}
+} */

@@ -1,17 +1,20 @@
-.login_container {
-	max-width: 500px;
-	margin: 0 auto;
-	padding: 20px;
-	background-color: white;
-	
-	border-radius: 5px;
-	margin-top: 100px;
-	height: 500px;
-}
 
-h1 {
-	text-align: center;
-	margin-bottom: 20px;
+ .login_container {
+	padding: 40px;
+	max-width: 600px;
+	margin: 0 auto;
+
+	background-color: white;
+	border-radius: 7px;
+	height: 640px;
+} 
+.create_new_acc{
+	color: rgb(232, 123, 7);
+	text-decoration: none;
+
+}
+.create_new_acc:hover{
+text-decoration: underline;
 }
 
 form {
@@ -21,34 +24,4 @@ form {
 
 label {
 	margin-bottom: 5px;
-}
-
-input {
-	padding: 8px;
-	margin-bottom: 10px;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-
-.signIn {
-	background-color: rgb(62, 112, 220);
-	border-radius: 5px;
-	color: white;
-	height: 45px;
-	border: #ccc;
-	width: 130px;
-}
-.signIn:hover {
-	background-color: rgb(231, 116, 22);
-}
-
-/* button:hover {
-	background-color: rgb(223, 77, 77);
-} */
-
-.link {
-	text-align: center;
-	margin-top: 10px;
-	color: #f6912b;
-	font-size: 18px;
-}
+} 

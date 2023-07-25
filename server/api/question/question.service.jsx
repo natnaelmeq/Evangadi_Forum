@@ -3,7 +3,7 @@ const pool = require("../../config/database.jsx");
 module.exports = {
 	ask: (data, callback) => {
 		pool.query(
-			"INSERT INTO question(question, question_description,user_id) VALUES (?, ?,?)",
+			"INSERT INTO question(question, question_description,user_id) VALUES (?,?,?)",
 			[data.question, data.description, data.userId],
 			(err, result) => {
 				if (err) {

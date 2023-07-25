@@ -52,7 +52,13 @@ const Question = () => {
 	};
 
 	return (
-		<div className="container my-5">
+		<div
+			className="container"
+			style={{
+				paddingTop: "95px",
+				paddingBottom: "30px",
+			}}
+		>
 			<Header />
 			<h3 className="text-center my-4">Steps to write a good Question</h3>
 			<ul style={{ lineHeight: "30px", width: "50%", margin: "0px auto 60px" }}>
@@ -63,7 +69,7 @@ const Question = () => {
 			</ul>
 			<h4 className="my-2 text-center">Ask a public question</h4>
 
-			<div className="shadow-sm py-3 px-5">
+			<div className="shadow-sm py-3 px-5 mb-2">
 				<form onSubmit={handleSubmit} action="">
 					<input
 						className="my-3 form-control"
@@ -82,17 +88,17 @@ const Question = () => {
 						placeholder="Question Description..."
 						onChange={handleChange}
 					/>
-					<button>
-						<Button className="mt-4" variant="primary">
+					<span>
+						<Button className="mt-4" variant="primary" type="submit">
 							Post Your Question
 						</Button>
-					</button>
+						<Link to="/">
+							<Button variant="warning" className="mt-4 mx-4">
+								Back to DashBord
+							</Button>
+						</Link>
+					</span>
 				</form>
-				<Link to={"/"}>
-					<Button variant="warning" href="/" className="mt-4 mx-4">
-						Back to DashBord
-					</Button>
-				</Link>
 			</div>
 		</div>
 	);
