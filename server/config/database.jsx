@@ -3,8 +3,8 @@ require("dotenv").config();
 const pool = mysql.createPool({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
-	database: process.env.DB,
-	password: process.env.PASSWORD,
+	database: process.env.MYSQL_DB,
+	password: process.env.DB_PASS,
 	connectionLimit: 10,
 });
 pool.getConnection(function (err, connection) {
@@ -33,10 +33,8 @@ pool.getConnection(function (err, connection) {
   question_description varchar(255),
   question_code_block varchar(255),
   tags varchar(255),
-  post_id varchar(255) ,
   user_id INT not null ,
   PRIMARY KEY (question_id),
-  UNIQUE KEY (post_id),
   FOREIGN KEY (user_id) REFERENCES registration(user_id)
 )`;
 

@@ -84,41 +84,51 @@ const Answer = () => {
 	return (
 		<>
 			<Header />
-			<div className="container">
-				<div className="m-5">
+			<div
+				className="container"
+				style={{
+					paddingTop: "85px",
+					paddingBottom: "30px",
+				}}
+			>
+				<div className="m-5 ">
 					{question && question.question ? (
 						<div>
-							<h2 className="my-5">{question.question}</h2>
-							<h4>{question.question_description}</h4>
+							<h2>Question</h2>
+							<h4 className="">{question.question}</h4>
+							<h4 className="fw-light">{question.question_description}</h4>
 							<h6>{question.question_id}</h6>
 						</div>
 					) : (
 						<div>Loading...</div>
 					)}
-					<h1>Answers From The Community</h1>
-
+					<hr />
+					<h2>Answers From The Community</h2>
+					<hr />
 					{submittedAnswer && submittedAnswer.length > 0 ? (
 						<div>
-							<h3>Answers:</h3>
+							{/* <h3>Answers:</h3> */}
 							{submittedAnswer.map((answer, index) => (
 								<div key={index}>
-									<div className="col-md-10 col-sm-12">
-										<h6>{answer.answer}</h6>
-									</div>
-
 									{/* <p>Answer: {answer.answer}</p> */}
-									<div className="my-5 row shadow">
-										<div className={`order-1 col-md-2 col-sm-12`}>
-											<div className="row">
-												<div className="col-sm-12">image</div>
-												<div className="col-sm-12">
-													<h6 className="my-3 text-secondary text-capitalize">
-														{answer.username}
-													</h6>
-												</div>
+
+									<div className=" py-3 row shadow-sm mt-4 d-block">
+										<div className="tieuser order-1 col-md-2 col-sm-12 ">
+											<i className="fa-solid fa-user-tie tie "></i>
+											<p className="question_user_name mt-2 ">
+												<h3 className="lead question_user_name">
+													{answer.username}
+												</h3>
+											</p>
+										</div>
+										<div>
+											<div className="col-md-10 col-sm-12">
+												<h6>{answer.answer}</h6>
 											</div>
+											{/* <p className="">{singleQ.question_id}</p> */}
 										</div>
 									</div>
+
 									{/* <p>by: {answer.username}</p> */}
 								</div>
 							))}
@@ -146,18 +156,23 @@ const Answer = () => {
 							placeholder="Your Answer ..."
 							onChange={handleChange}
 						/>
-
-						<Button type="submit" className="my-4" variant="primary">
-							Post Your Answer
-						</Button>
-					</form>
-					<Link to={"/"}>
 						<span>
-							<Button variant="warning" className="mx-4">
-								Back to DashBord
+							<Button className="mt-4" variant="primary" type="submit">
+								Post Your Question
 							</Button>
+							<Link to="/">
+								<Button
+									style={{
+										backgroundColor: "rgb(231, 116, 22)",
+										border: "none",
+									}}
+									className="mt-4 mx-4"
+								>
+									Back to DashBord
+								</Button>
+							</Link>
 						</span>
-					</Link>
+					</form>
 				</div>
 			</div>
 		</>
