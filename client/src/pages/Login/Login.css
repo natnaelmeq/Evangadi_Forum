@@ -25,3 +25,10 @@ form {
 label {
 	margin-bottom: 5px;
 } 
+
+.eye_icon{
+	position: relative;	
+	bottom: 34px;
+	left: 373px;
+	cursor: pointer;
+}

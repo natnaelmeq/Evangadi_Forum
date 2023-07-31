@@ -55,7 +55,6 @@ const Question = () => {
 		<div
 			className="container"
 			style={{
-				paddingTop: "95px",
 				paddingBottom: "30px",
 			}}
 		>
@@ -93,7 +92,10 @@ const Question = () => {
 							Post Your Question
 						</Button>
 						<Link to="/">
-							<Button variant="warning" className="mt-4 mx-4">
+							<Button
+								style={{ backgroundColor: "rgb(231, 116, 22)", border: "none" }}
+								className=" mt-4 ms-3 "
+							>
 								Back to DashBord
 							</Button>
 						</Link>

@@ -58,7 +58,7 @@ const SignUp = () => {
 					paddingBottom: "100px",
 				}}
 			>
-				<Container>
+				<Container className="px-5">
 					<Row>
 						<div className="login_container col-sm-12 col-md shadow">
 							<div className=" text-center mb-4">

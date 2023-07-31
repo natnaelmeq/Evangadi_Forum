@@ -8,14 +8,34 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import bg from "../../assets/Image/bg-svg-f.svg";
 import "./Login.css";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+library.add(faEye, faEyeSlash);
+
+// import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+// import fontawesome from "@fortawesome/fontawesome";
+// import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+// import { faCheckSquare, faCoffee } from "@fortawesome/fontawesome-free-solid";
 const Login = () => {
 	const [userData, setUserData] = useContext(UserContext);
 	const navigate = useNavigate();
 	const [form, setForm] = useState({});
+	const [visible, setVisiblity] = useState(false);
 
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
+
+ const handleToggle = () => {
+		setVisible((prevState) => !prevState);
+ };
+	// const Icon = (
+
+	// 	<FontAwesomeIcon icon={visible? "eye-slash" : "eye"} />
+	// )
+
+	const InputType = visible ? "text" : "password";
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -59,57 +79,64 @@ const Login = () => {
 					paddingBottom: "100px",
 				}}
 			>
-				<Container interval={null}>
+				<Container className="x-5">
 					<Row>
 						<Col sm={12} md={6}>
-							
-									<div className="login_container shadow px-5">
-										{/* <h1>Login</h1> */}
-										<div className=" text-center px-md- px-sm-3 mx-md-3 mb-4">
-											<h5>Login to your account</h5>
-											<p>
-												Don’t have an account?
-												<Link
-													className="create_new_acc"
-													to="/signup"
-													onClick={() => {
-														// toggle();
-													}}
-												>
-													{" "}
-													Create a new account
-												</Link>
-											</p>
-										</div>
-										{/* <div className="px-xl-4 "></div> */}
-										<form onSubmit={handleSubmit}>
-											{/* <label>Email:</label>
+							<div className="login_container shadow px-5">
+								{/* <h1>Login</h1> */}
+								<div className=" text-center px-md- px-sm-3 mx-md-3 mb-4">
+									<h5>Login to your account</h5>
+									<p>
+										Don’t have an account?
+										<Link
+											className="create_new_acc"
+											to="/signup"
+											onClick={() => {
+												// toggle();
+											}}
+										>
+											{" "}
+											Create a new account
+										</Link>
+									</p>
+								</div>
+								{/* <div className="px-xl-4 "></div> */}
+								<form onSubmit={handleSubmit}>
+									{/* <label>Email:</label>
                 <input type="text" name="email" onChange={handleChange} /> */}
-											<input
-												type="email"
-												className="p-3 email form-control"
-												name="email"
-												placeholder="Email address"
-												onChange={handleChange}
-											/>
-											{/* <label>Password:</label>
+									<input
+										type="email"
+										className="p-3 email form-control"
+										name="email"
+										placeholder="Email address"
+										onChange={handleChange}
+									/>
+									{/* <label>Password:</label>
                 <input type="password" name="password" onChange={handleChange} /> */}
-											<input
-												type="text"
-												className="p-3 mt-3 form-control"
-												name="password"
-												placeholder="Password"
-												onChange={handleChange}
-											/>
-											<Link className="create_new_acc text-end pt-3">
-												Forgot password?
-											</Link>
-											<Button type="submit" className=" mt-4 signIn">
-												Login
-											</Button>
-										</form>
-									</div>
-							
+									<input
+										type={InputType}
+										className="p-3 mt-3 form-control"
+										name="password"
+										placeholder="Password"
+										onChange={handleChange}
+									/>
+
+									<span>
+										<FontAwesomeIcon
+											icon={visible ? "faEyeSlash" : "faEye"}
+											onClick={handleToggle}
+											className="eye_icon"
+										/>
+									</span>
+
+									<Link className="create_new_acc text-end pt-3">
+										Forgot password?
+									</Link>
+									<Button type="submit" className=" mt-4 signIn">
+										Login
+									</Button>
+								</form>
+							</div>
 						</Col>
 
 						<Col sm={12} md={6}>
@@ -141,8 +168,6 @@ const Login = () => {
 				</Container>
 			</section>
 		</>
-
-		//------------------------------------
 	);
 };
 

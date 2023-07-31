@@ -76,9 +76,11 @@ const Header = () => {
 					className="shadow-sm p-3 fixed-top bg-white"
 				>
 					<Container className="container" fluid>
-						<Navbar.Brand className="" href="#">
-							<img src={img2} alt="Evangadi Logo" />
-						</Navbar.Brand>
+						<Link to="/">
+							<Navbar.Brand>
+								<img src={img2} alt="Evangadi Logo" />
+							</Navbar.Brand>
+						</Link>
 						<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
 						<Navbar.Offcanvas
 							id={`offcanvasNavbar-expand-${expand}`}
@@ -88,10 +90,10 @@ const Header = () => {
 							<Offcanvas.Header closeButton></Offcanvas.Header>
 							<Offcanvas.Body className="bg-orange">
 								<Nav className="justify-content-end flex-grow-1 pe-3">
-									<Nav.Link to="/login" className=" pt-3">
+									<Nav.Link to="/login" className="pt-3">
 										Home
 									</Nav.Link>
-									<Nav.Link href="#" className=" pt-3 me-4">
+									<Nav.Link tos="#" className=" pt-3 me-4">
 										How it Work
 									</Nav.Link>
 									<Nav.Link to="/login">

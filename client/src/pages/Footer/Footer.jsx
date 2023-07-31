@@ -1,6 +1,7 @@
 import React from 'react'
 import './Footer.css'
 import img1 from "../../assets/Image/Image20230419000207.png";
+import { InputGroup } from 'react-bootstrap';
 
 const Footer = () => {
   return (
@@ -15,6 +16,7 @@ const Footer = () => {
 							<div className="telegram col-sm p-2">
 								{" "}
 								{/* <TelegramIcon /> */}
+								
 								<i className="fab fa-telegram"></i>
 							</div>
 							<div className="linkedin col-sm p-2">
