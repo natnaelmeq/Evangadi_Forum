@@ -1,11 +1,11 @@
-.sign-up-container {
+.login_container_signUp {
     max-width: 480px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    background-color: #e9d2d231; 
-    /* margin-top: 100px; */
-    height: 530px; 
+    
+    background-color: #ffff; 
+    
+    height: 75vh; 
     border-radius: 10px;
     
 }

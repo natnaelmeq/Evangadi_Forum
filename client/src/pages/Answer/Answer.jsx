@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
+import axios from "../../axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import { UserContext } from "../../context/UserContext";
 import { Button } from "react-bootstrap";
+import "./Answer.css"
 
 const Answer = () => {
 	const [userData, setUserData] = useContext(UserContext);
@@ -16,17 +17,17 @@ const Answer = () => {
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
-	console.log(submittedAnswer);
-	console.log(userData);
+
 	useEffect(() => {
 		if (!userData.user) navigate("/login");
 	}, [userData.user, navigate]);
+	const gettoken = localStorage.getItem("authtoken");
 
 	useEffect(() => {
 		const fetchQuestion = async () => {
 			try {
 				const response = await axios.get(
-					`http://localhost:4500/api/question/question/${id}`
+					`/question/question/${id}`
 				);
 				const data = response.data;
 				setQuestion(data);
@@ -42,20 +43,17 @@ const Answer = () => {
 		try {
 			const yourAnswer = answerInputRef.current.value;
 
-			const response = await axios.post(`http://localhost:4500/api/answer`, {
+			const response = await axios.post(`/answer`, {
 				questionid: id,
 				answer: yourAnswer,
 				userId: userData?.user?.id,
+				token: gettoken,
 			});
 			setSubmittedAnswer([
 				...submittedAnswer,
 				{ answer: yourAnswer, username: userData.user.display_name },
 			]);
-			setUserData({
-				...userData,
-				token: response.data.token,
-			});
-			localStorage.setItem("auth-token", response.data.token);
+			
 			navigate(`/question/${id}`);
 			console.log("Response Data:", response.data);
 			answerInputRef.current.value = "";
@@ -69,11 +67,11 @@ const Answer = () => {
 		const fetchAnswers = async () => {
 			try {
 				const response = await axios.get(
-					`http://localhost:4500/api/answer/allAnswerForQ/${id}`
+					`/answer/allAnswerForQ/${id}`
 				);
 				const data = response.data;
 				setSubmittedAnswer(data);
-				console.log(data);
+				
 			} catch (error) {
 				console.log("Error:", error);
 			}
@@ -83,83 +81,89 @@ const Answer = () => {
 
 	return (
 		<>
-			<Header />
-			<div className="container">
-				<div className="m-5">
-					{question && question.question ? (
-						<div>
-							<h2 className="my-5">{question.question}</h2>
-							<h4>{question.question_description}</h4>
-							<h6>{question.question_id}</h6>
-						</div>
-					) : (
-						<div>Loading...</div>
-					)}
-					<h1>Answers From The Community</h1>
+			<>
+				<Header />
+				<div
+					className="container"
+					style={{
+						paddingTop: "85px",
+						paddingBottom: "30px",
+					}}
+				>
+					<div className="m-5 ">
+						{question && question.question ? (
+							<div>
+								<h2>Question</h2>
+								<h4 className="">{question.question}</h4>
+								<h4 className="fw-light">{question.question_description}</h4>
+								<h6>{question.question_id}</h6>
+							</div>
+						) : (
+							<div>Loading...</div>
+						)}
+						<hr />
+						<h2>Answers From The Community</h2>
+						<hr />
+						{submittedAnswer && submittedAnswer.length > 0 ? (
+							<div>
+							
+								{submittedAnswer.map((answer, index) => (
+									<div key={index}>
+									
 
-					{submittedAnswer && submittedAnswer.length > 0 ? (
-						<div>
-							<h3>Answers:</h3>
-							{submittedAnswer.map((answer, index) => (
-								<div key={index}>
-									<div className="col-md-10 col-sm-12">
-										<h6>{answer.answer}</h6>
-									</div>
-
-									{/* <p>Answer: {answer.answer}</p> */}
-									<div className="my-5 row shadow">
-										<div className={`order-1 col-md-2 col-sm-12`}>
-											<div className="row">
-												<div className="col-sm-12">image</div>
-												<div className="col-sm-12">
-													<h6 className="my-3 text-secondary text-capitalize">
+										<div className=" py-3 shadow mt-4 insider  ">
+											<div className="tieuser col-md-2 col-sm-12 px-4">
+												<i className="fa-solid fa-user-tie tie "></i>
+												<p className="question_user_name mt-2  ">
+													<h3 className="lead question_user_name ps-2 ">
 														{answer.username}
-													</h6>
-												</div>
+													</h3>
+												</p>
+											</div>
+
+											<div className="col-md-10 col-sm-1 px-4 ">
+												<h6>{answer.answer}</h6>
 											</div>
 										</div>
 									</div>
-									{/* <p>by: {answer.username}</p> */}
-								</div>
-							))}
+								))}
+							</div>
+						) : (
+							<div>No answers submitted yet.</div>
+						)}
+						<div className="my-5 text-center">
+							<h2>Answer The Above Question</h2>
 						</div>
-					) : (
-						<div>No answers submitted yet.</div>
-					)}
-					<div className="my-5 text-center">
-						<h2>Answer The Above Question</h2>
+						<form onSubmit={handleSubmit}>
+							<textarea
+								rows={4}
+								className="form-control"
+								ref={answerInputRef}
+								type="text"
+								name="ask"
+								placeholder="Your Answer ..."
+								onChange={handleChange}
+							/>
+							<span>
+								<Button className="mt-4" variant="primary" type="submit">
+									Post Your Question
+								</Button>
+								<Link to="/">
+									<Button
+										style={{
+											backgroundColor: "rgb(231, 116, 22)",
+											border: "none",
+										}}
+										className="mt-4 mx-4"
+									>
+										Back to DashBord
+									</Button>
+								</Link>
+							</span>
+						</form>
 					</div>
-					<form onSubmit={handleSubmit}>
-						{/* <input
-							ref={answerInputRef}
-							type="text"
-							name="ask"
-							placeholder="Please write your answer here "
-							// onChange={handleChange}
-						/> */}
-						<textarea
-							rows={4}
-							className="form-control"
-							ref={answerInputRef}
-							type="text"
-							name="ask"
-							placeholder="Your Answer ..."
-							onChange={handleChange}
-						/>
-
-						<Button type="submit" className="my-4" variant="primary">
-							Post Your Answer
-						</Button>
-					</form>
-					<Link to={"/"}>
-						<span>
-							<Button variant="warning" className="mx-4">
-								Back to DashBord
-							</Button>
-						</span>
-					</Link>
 				</div>
-			</div>
+			</>
 		</>
 	);
 };

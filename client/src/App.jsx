@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import axios from "./axios";
 import { UserContext } from "./context/UserContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,13 +16,13 @@ import Footer from "./pages/Footer/Footer.jsx";
 function App() {
 	const [userData, setuserData] = useContext(UserContext);
 	const checkLoggedIN = async () => {
-		let token = localStorage.getItem("auth-token");
-		console.log("Token from localStorage:", token);
+		let token = localStorage.getItem("authtoken");
+		
 		if (token === null) {
-			// localStorage.setItem("auth-token", "");
+			
 			token = "";
 		} else {
-			const userRes = await axios.get("http://localhost:4500/api/users", {
+			const userRes = await axios.get("/users", {
 				headers: { "x-auth-token": token },
 			});
 			setuserData({

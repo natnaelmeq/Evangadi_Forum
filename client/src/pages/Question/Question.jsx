@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
-import axios from "axios";
+import axios from "../../axios";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,43 +8,37 @@ import Button from "react-bootstrap/Button";
 
 const Question = () => {
 	const [userData, setUserData] = useContext(UserContext);
-	console.log(userData);
 	const questionInputRef = useRef(null);
 	const descriptionInputRef = useRef(null);
 	const [form, setForm] = useState({});
 	const navigate = useNavigate();
+
 	const handleChange = (e) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
+
 	useEffect(() => {
 		if (!userData.user) navigate("/login");
 	}, [userData.user, navigate]);
+
 	const gettoken = localStorage.getItem("authtoken");
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			const ask = questionInputRef.current.value;
 			const askDescription = descriptionInputRef.current.value;
-			const response = await axios.post("http://localhost:4500/api/question", {
+			const response = await axios.post("/question", {
 				question: ask,
 				description: askDescription,
 				userId: userData?.user?.id,
 				token: gettoken,
 			});
 
-			setUserData({
-				...userData,
-				token: response.data.token,
-			});
-
 			navigate("/question");
-
-			console.log("Response Data:", response.data);
 			questionInputRef.current.value = "";
 			descriptionInputRef.current.value = "";
 			alert("Thank you for your question");
-
-			// ...
 		} catch (error) {
 			console.log("Error Message:", error.message);
 			alert(error.response?.data?.msg || "Error asking the question");
@@ -62,9 +56,8 @@ const Question = () => {
 				<li>Review your question and post it to the site.</li>
 			</ul>
 			<h4 className="my-2 text-center">Ask a public question</h4>
-
-			<div className="shadow-sm py-3 px-5">
-				<form onSubmit={handleSubmit} action="">
+			<div className="shadow-sm py-3 px-5 mb-2">
+				<form onSubmit={handleSubmit}>
 					<input
 						className="my-3 form-control"
 						ref={questionInputRef}
@@ -82,17 +75,20 @@ const Question = () => {
 						placeholder="Question Description..."
 						onChange={handleChange}
 					/>
-					<button>
-						<Button className="mt-4" variant="primary">
+					<span>
+						<Button className="mt-4" variant="primary" type="submit">
 							Post Your Question
 						</Button>
-					</button>
+						<Link to="/">
+							<Button
+								style={{ backgroundColor: "rgb(231, 116, 22)", border: "none" }}
+								className=" mt-4 ms-3"
+							>
+								Back to DashBord
+							</Button>
+						</Link>
+					</span>
 				</form>
-				<Link to={"/"}>
-					<Button variant="warning" href="/" className="mt-4 mx-4">
-						Back to DashBord
-					</Button>
-				</Link>
 			</div>
 		</div>
 	);

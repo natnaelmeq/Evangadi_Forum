@@ -5,17 +5,18 @@ import Dashbord from "../Dashbord/Dashbord";
 import Header from "../Header/Header";
 import './Home.css'
 
+
 const Home = ({ logout }) => {
 	const [userData] = useContext(UserContext);
 	const navigate = useNavigate();
-	console.log(userData);
 
+	const isLoggedIn = !!userData.user;
 	useEffect(() => {
-		if (!userData.user) navigate("/login");
-	}, [userData.user, navigate]);
+		if (!isLoggedIn) navigate("/login");
+	}, [isLoggedIn, navigate]);
+	const authToken = localStorage.getItem("authtoken");
 
-	// console.log("userData:", userData);
-	// console.log("userData.user:", userData.user);
+	
 
 	return (
 		<>

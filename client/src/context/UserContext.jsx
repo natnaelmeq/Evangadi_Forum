@@ -4,8 +4,8 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
 	const [userData, setUserData] = useState({
-		user: undefined,
-		token: undefined,
+		// user: undefined,
+		// token: undefined,
 	});
 	return (
 		<UserContext.Provider value={[userData, setUserData]}>
@@ -13,4 +13,6 @@ export const UserProvider = (props) => {
 		</UserContext.Provider>
 	);
 };
+
+
 
