@@ -1,4 +1,4 @@
-.login_container_signUp {
+/* .login_container_signUp {
     max-width: 480px;
     margin: 0 auto;
     padding: 20px;
@@ -27,4 +27,69 @@
     background-color: orange;
 }
 .color_orange{
-    color: orange;}
+    color: orange;} */
+
+.sign-up-container {
+	max-width: 480px;
+	margin: 0 auto;
+	margin-right: 30px;
+	padding: 30px;
+	/* border: 1px solid #ccc; */
+	background-color: white;
+	/* margin-top: 100px; */
+	height: 530px;
+	border-radius: 10px;
+}
+.sign-up-container h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.sign-up-container form {
+	margin-bottom: 20px;
+	/* margin-right: 0px;
+    width: 100%; */
+	/* }.sign-up-container button {
+    width: 50%;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+	/* text-align: center; */
+}
+*/ .sign-up-container a {
+	display: block;
+	text-align: center;
+}
+/* .agree_andjoin:hover { */
+/* background-color: orange; */
+/* } */
+/* .color_orange{
+    color: orange;} */
+/* .form-group input:focus{
+        outline:0px !important; 
+        box-shadow: none !important;
+ } */
+.agree_and_join {
+	width: 100%;
+	/* margin-left: auto;
+    margin-right: auto; */
+}
+
+
+.visibility {
+	display: inline-block;
+	position: relative;
+}
+
+.eye {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.eye:hover {
+	color: orange;
+}
+
+@media screen {
+
+}

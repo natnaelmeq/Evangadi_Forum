@@ -1,5 +1,3 @@
-
-
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../axios";
@@ -28,13 +26,10 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginRes = await axios.post(
-				"/users/login",
-				{
-					email: form.email,
-					password: form.password,
-				}
-			);
+			const loginRes = await axios.post("/users/login", {
+				email: form.email,
+				password: form.password,
+			});
 
 			setUserData({
 				token: loginRes.data.token,
@@ -71,54 +66,55 @@ const Login = () => {
 					<Row>
 						<Col sm={12} md={5}>
 							<div className="login_container shadow px-5">
-							
 								<div className=" text-center px-md- px-sm-3 mx-md-3 mb-4">
 									<h5>Login to your account</h5>
 									<p>
-										Don’t have an account?
+										Don't have an account?
 										<Link
 											className="create_new_acc"
 											to="/signup"
-											onClick={() => {
-												
-											}}
+											onClick={() => {}}
 										>
 											{" "}
 											Create a new account
 										</Link>
 									</p>
 								</div>
-								
 
 								<form onSubmit={handleSubmit}>
 									<input
-										type="email"
-										className="p-3 email form-control"
+										type="text"
+										className="form-control"
 										name="email"
-										placeholder="Email address"
+										placeholder="email "
 										onChange={handleChange}
-									/>
-									<span onClick={passwordchange}>
+									/>{" "}
+									<br />
+									<span>
 										{" "}
 										<input
 											type={passwordVisible ? "text" : "password"}
-											className="p-3 mt-3 form-control"
+											className="p-2 mt-1 form-control"
 											name="password"
 											placeholder="Password"
 											onChange={handleChange}
 										/>{" "}
-										<i style={{ position: "relative",
-	top: "-40px",
-	left: "85%",
-	cursor: "pointer" }}>
+										<i
+											onClick={passwordchange}
+											style={{
+												position: "relative",
+												top: "-35px",
+												left: "85%",
+												cursor: "pointer",
+											}}
+										>
 											{passwordVisible ? (
-												<VisibilityOffIcon />
+												<VisibilityIcon />
 											) : (
-												<VisibilityIcon  />
+												<VisibilityOffIcon />
 											)}
 										</i>
 									</span>
-
 									<Link className="create_new_acc text-end pt-3">
 										Forgot password?
 									</Link>
@@ -133,7 +129,7 @@ const Login = () => {
 							<div className="pt-5 px-4">
 								<small style={{ color: "#f6912b" }}>About</small>
 								<h1 className="mb-4">Evangadi Networks</h1>
-								<p style={{ lineHeight: "30px" }}>
+								<div style={{ lineHeight: "30px" }}>
 									No matter what stage of life you are in, whether you’re just
 									starting elementary school or being promoted to CEO of a
 									Fortune 500 company, you have much to offer to those who are
@@ -143,7 +139,7 @@ const Login = () => {
 									Whether you are willing to share your knowledge or you are
 									just looking to meet mentors of your own, please start by
 									joining the network here.
-								</p>
+								</div>
 								<Button
 									style={{
 										backgroundColor: "#f6912b",
