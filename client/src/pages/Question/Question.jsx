@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
-import axios from "axios";
+import axios from "../../axios";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -25,7 +25,7 @@ const Question = () => {
 		try {
 			const ask = questionInputRef.current.value;
 			const askDescription = descriptionInputRef.current.value;
-			const response = await axios.post("http://localhost:4500/api/question", {
+			const response = await axios.post("/question", {
 				question: ask,
 				description: askDescription,
 				userId: userData?.user?.id,

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import axios from "axios";
+import axios from "../../axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import { UserContext } from "../../context/UserContext";
@@ -22,11 +22,13 @@ const Answer = () => {
 		if (!userData.user) navigate("/login");
 	}, [userData.user, navigate]);
 
+const gettoken = localStorage.getItem("authtoken");
+
 	useEffect(() => {
 		const fetchQuestion = async () => {
 			try {
 				const response = await axios.get(
-					`http://localhost:4500/api/question/question/${id}`
+					`/question/question/${id}`
 				);
 				const data = response.data;
 				setQuestion(data);
@@ -42,24 +44,27 @@ const Answer = () => {
 		try {
 			const yourAnswer = answerInputRef.current.value;
 
-			const response = await axios.post(`http://localhost:4500/api/answer`, {
+			const response = await axios.post(`/answer`, {
 				questionid: id,
 				answer: yourAnswer,
 				userId: userData?.user?.id,
+				token: gettoken,
 			});
 			setSubmittedAnswer([
 				...submittedAnswer,
 				{ answer: yourAnswer, username: userData.user.display_name },
 			]);
-			setUserData({
-				...userData,
-				token: response.data.token,
-			});
-			localStorage.setItem("auth-token", response.data.token);
+			// setUserData({
+			// 	...userData,
+			// 	token: response.data.token,
+			// });
+
+			// localStorage.setItem("auth-token", response.data.token);
 			navigate(`/question/${id}`);
 			console.log("Response Data:", response.data);
 			answerInputRef.current.value = "";
 			alert("Thank you for your answer");
+
 		} catch (error) {
 			console.log("Error:", error.msg);
 			alert(error.msg);
@@ -69,7 +74,7 @@ const Answer = () => {
 		const fetchAnswers = async () => {
 			try {
 				const response = await axios.get(
-					`http://localhost:4500/api/answer/allAnswerForQ/${id}`
+					`/answer/allAnswerForQ/${id}`
 				);
 				const data = response.data;
 				setSubmittedAnswer(data);
@@ -80,6 +85,15 @@ const Answer = () => {
 		};
 		fetchAnswers();
 	}, [id]);
+
+	const handleEdit = (answerId, updatedAnswer) => {
+		// Implement your logic to update the answer in the backend and update the state accordingly
+	};
+
+	// Function to handle deleting an answer
+	const handleDelete = (answerId) => {
+		// Implement your logic to delete the answer in the backend and update the state accordingly
+	};
 
 	return (
 		<>
@@ -127,6 +141,21 @@ const Answer = () => {
 											</div>
 											{/* <p className="">{singleQ.question_id}</p> */}
 										</div>
+										{/* <div className="d-flex justify-content-end mt-3">
+											<Button
+												variant="secondary"
+												className="mx-2"
+												onClick={() => handleEdit(answer.id, answer.answer)}
+											>
+												Edit
+											</Button>
+											<Button
+												variant="danger"
+												onClick={() => handleDelete(answer.id)}
+											>
+												Delete
+											</Button>
+										</div> */}
 									</div>
 
 									{/* <p>by: {answer.username}</p> */}

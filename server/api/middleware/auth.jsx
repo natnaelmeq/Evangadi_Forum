@@ -7,13 +7,13 @@ const auth = (req, res, next) => {
 		if (!token)
 			return res
 				.status(401)
-				.json({ msg: "No authentication token,authorization denied." });
+				.json({ msg: "No authentication token, authorization denied." });
 		const verified = jwt.verify(token, process.env.JWT_SECRET);
 		console.log(verified);
 		if (!verified)
 			return res
 				.status(401)
-				.json({ msg: "Token verification failed,authorization denied" });
+				.json({ msg: "Token verification failed, authorization denied" });
 		req.id = verified.id;
 		next();
 	} catch (error) {

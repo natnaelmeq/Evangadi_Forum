@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
-import axios from "axios";
+import axios from "../../axios";
 import Header from "../Header/Header";
 import "./SignUP.css";
 import Container from "react-bootstrap/Container";
@@ -27,7 +27,7 @@ const SignUp = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			await axios.post("http://localhost:4500/api/users", form);
+			await axios.post("/users", form);
 			alert("Successfully signed up! Please log in with your new account.");
 			navigate("/login");
 			// const loginRes = await axios.post(

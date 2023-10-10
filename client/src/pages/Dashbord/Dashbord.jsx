@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 
@@ -19,7 +19,7 @@ const Dashbord = () => {
 	async function fetchQuestions() {
 		try {
 			const { data } = await axios.get(
-				"http://localhost:4500/api/question/dashbord"
+				"/question/dashbord"
 			);
 			setQuestion(data.data);
 			// console.log(data.data);
@@ -91,6 +91,7 @@ const Dashbord = () => {
 										<div className="tieuser ">
 											<i className="fa-solid fa-user-tie tie "></i>
 											<p className="question_user_name mt-2 ">
+												
 												{singleQ.user_name}
 											</p>
 										</div>
@@ -105,6 +106,7 @@ const Dashbord = () => {
 									<div className="sign p-5 mt-3 text-secondary">
 										<i className="fa-solid fa-chevron-right fa-xl "></i>
 									</div>
+									
 								</Link>
 							))}
 					</Row>
